@@ -303,14 +303,17 @@ private:
   tcp::acceptor acceptor_;
 };
 
+
+// nc localhost 12345
 int main(int argc, char* argv[])
 {
   try
   {
     if (argc != 2)
     {
-      std::cerr << "Usage: server <port>\n";
-      return 1;
+      argv = new char*[2];
+      argv[0] = (char*)"server";
+      argv[1] = (char*)"12345";
     }
 
     context_memory memory(4096);

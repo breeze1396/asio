@@ -203,8 +203,12 @@ int main(int argc, char* argv[])
   {
     if (argc < 2)
     {
-      std::cerr << "Usage: chat_server <port> [<port> ...]\n";
-      return 1;
+      // std::cerr << "Usage: chat_server <port> [<port> ...]\n";
+      // return 1;
+      argv = new char*[2];
+      argv[0] = (char*)"chat_server";
+      argv[1] = (char*)"12345";
+      argc = 2;
     }
 
     asio::io_context io_context;

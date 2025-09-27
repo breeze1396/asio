@@ -133,8 +133,12 @@ int main(int argc, char* argv[])
   {
     if (argc != 3)
     {
-      std::cerr << "Usage: chat_client <host> <port>\n";
-      return 1;
+      // std::cerr << "Usage: chat_client <host> <port>\n";
+      // return 1;
+      argv = new char*[3];
+      argv[0] = (char*)"chat_client";
+      argv[1] = (char*)"127.0.0.1";
+      argv[2] = (char*)"12345";
     }
 
     asio::io_context io_context;

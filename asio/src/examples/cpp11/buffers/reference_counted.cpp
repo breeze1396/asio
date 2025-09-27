@@ -103,8 +103,9 @@ int main(int argc, char* argv[])
   {
     if (argc != 2)
     {
-      std::cerr << "Usage: reference_counted <port>\n";
-      return 1;
+      argv = new char*[2];
+      argv[0] = (char*)"server";
+      argv[1] = (char*)"12345";
     }
 
     asio::io_context io_context;

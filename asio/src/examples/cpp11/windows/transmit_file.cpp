@@ -172,5 +172,5 @@ int main(int argc, char* argv[])
 }
 
 #else // defined(ASIO_HAS_WINDOWS_OVERLAPPED_PTR)
-# error Overlapped I/O not available on this platform
+#warning Overlapped I/O not available on this platform
 #endif // defined(ASIO_HAS_WINDOWS_OVERLAPPED_PTR)
