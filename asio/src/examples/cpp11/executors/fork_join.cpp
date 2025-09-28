@@ -266,8 +266,11 @@ int main(int argc, char* argv[])
 {
   if (argc != 2)
   {
-    std::cerr << "Usage: fork_join <size>\n";
-    return 1;
+    // std::cerr << "Usage: fork_join <size>\n";
+    // return 1;
+    argv = new char*[2];
+    argv[1] = const_cast<char*>("1000000");
+    argc = 2;
   }
 
   std::vector<double> vec(std::atoll(argv[1]));
@@ -277,13 +280,24 @@ int main(int argc, char* argv[])
   std::mt19937 g(rd());
   std::shuffle(vec.begin(), vec.end(), g);
 
+  std::vector<double> copy(vec);
+
   std::chrono::steady_clock::time_point start = std::chrono::steady_clock::now();
 
-  fork_join_sort(vec.begin(), vec.end());
+  fork_join_sort(copy.begin(), copy.end());
 
   std::chrono::steady_clock::duration elapsed = std::chrono::steady_clock::now() - start;
 
   std::cout << "sort took ";
+  std::cout << std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+  std::cout << " microseconds" << std::endl;
+
+  std::vector<double> copy2(vec);
+
+  start = std::chrono::steady_clock::now();
+  std::sort(copy2.begin(), copy2.end());
+  elapsed = std::chrono::steady_clock::now() - start;
+  std::cout << "std::sort took ";
   std::cout << std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
   std::cout << " microseconds" << std::endl;
 }

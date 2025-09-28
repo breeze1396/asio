@@ -23,8 +23,11 @@ int main(int argc, char* argv[])
   {
     if (argc != 3)
     {
-      std::cerr << "Usage: blocking_tcp_echo_client <host> <port>\n";
-      return 1;
+      // std::cerr << "Usage: blocking_tcp_echo_client <host> <port>\n";
+      // return 1;
+      argv = new char*[3];
+      argv[1] = (char*)"localhost";
+      argv[2] = (char*)"12345";
     }
 
     asio::io_context io_context;
