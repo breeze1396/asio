@@ -1,8 +1,9 @@
 project(cpp11_http_client)
-file(GLOB_RECURSE CPP11_HTTP_CLIENT_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 
-add_executable(cpp11_http_client)
+file(GLOB executors_files *.cpp)
 
-target_sources(cpp11_http_client PRIVATE ${CPP11_HTTP_CLIENT_SOURCES})
-
-link_example(${PROJECT_NAME})
+foreach(file ${executors_files})
+    get_filename_component(file_we ${file} NAME_WE)
+    add_executable(http_client_${file_we} ${file})
+    link_example(http_client_${file_we})
+endforeach()

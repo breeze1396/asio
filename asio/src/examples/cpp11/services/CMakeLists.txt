@@ -1,8 +1,5 @@
 project(cpp11_services)
-file(GLOB_RECURSE CPP11_SERVICES_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB files *.cpp)
 
-add_executable(cpp11_services)
-
-target_sources(cpp11_services PRIVATE ${CPP11_SERVICES_SOURCES})
-
+add_executable(${PROJECT_NAME} ${files})
 link_example(${PROJECT_NAME})

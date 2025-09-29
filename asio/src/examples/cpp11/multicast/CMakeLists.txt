@@ -1,8 +1,8 @@
 project(cpp11_multicast)
-file(GLOB_RECURSE CPP11_MULTICAST_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB executors_files *.cpp)
 
-add_executable(cpp11_multicast)
-
-target_sources(cpp11_multicast PRIVATE ${CPP11_MULTICAST_SOURCES})
-
-link_example(${PROJECT_NAME})
+foreach(file ${executors_files})
+    get_filename_component(file_we ${file} NAME_WE)
+    add_executable(multicast_${file_we} ${file})
+    link_example(multicast_${file_we})
+endforeach()

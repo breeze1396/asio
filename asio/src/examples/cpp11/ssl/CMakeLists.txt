@@ -1,8 +1,8 @@
 project(cpp11_ssl)
-file(GLOB_RECURSE CPP11_SSL_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB files *.cpp)
 
-add_executable(cpp11_ssl)
-
-target_sources(cpp11_ssl PRIVATE ${CPP11_SSL_SOURCES})
-
-link_example(${PROJECT_NAME})
+foreach(file ${files})
+    get_filename_component(file_we ${file} NAME_WE)
+    add_executable(${PROJECT_NAME}_${file_we} ${file})
+    link_example(${PROJECT_NAME}_${file_we})
+endforeach()

@@ -1,8 +1,8 @@
 project(cpp11_iostreams)
-file(GLOB_RECURSE CPP11_IOSTREAMS_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB executors_files *.cpp)
 
-add_executable(cpp11_iostreams)
-
-target_sources(cpp11_iostreams PRIVATE ${CPP11_IOSTREAMS_SOURCES})
-
-link_example(${PROJECT_NAME})
+foreach(file ${executors_files})
+    get_filename_component(file_we ${file} NAME_WE)
+    add_executable(iostreams_${file_we} ${file})
+    link_example(iostreams_${file_we})
+endforeach()
