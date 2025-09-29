@@ -60,7 +60,7 @@ awaitable<void> listen(tcp::acceptor& acceptor)
 int main()
 {
   io_context ctx;
-  tcp::acceptor acceptor(ctx, {tcp::v4(), 54321});
+  tcp::acceptor acceptor(ctx, {tcp::v4(), 12345});
   co_spawn(ctx, listen(acceptor), detached);
   ctx.run();
 }

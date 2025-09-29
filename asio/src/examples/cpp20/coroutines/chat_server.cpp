@@ -65,6 +65,7 @@ public:
 
   void deliver(const std::string& msg)
   {
+    std::cout << msg; // forward to all participants
     recent_msgs_.push_back(msg);
     while (recent_msgs_.size() > max_recent_msgs)
       recent_msgs_.pop_front();
@@ -92,6 +93,10 @@ public:
       room_(room)
   {
     timer_.expires_at(std::chrono::steady_clock::time_point::max());
+    std::cout << "New connection from: "
+              << socket_.remote_endpoint().address().to_string() << 
+              ":" << socket_.remote_endpoint().port() <<
+              "\n";
   }
 
   void start()
@@ -122,7 +127,10 @@ private:
       {
         std::size_t n = co_await asio::async_read_until(socket_,
             asio::dynamic_buffer(read_msg, 1024), "\n", use_awaitable);
-
+        std::cout << "Received " << n << " bytes from "
+                  << socket_.remote_endpoint().address().to_string() << 
+                  ":" << socket_.remote_endpoint().port() <<
+                  "\n";
         room_.deliver(read_msg.substr(0, n));
         read_msg.erase(0, n);
       }
@@ -194,8 +202,11 @@ int main(int argc, char* argv[])
   {
     if (argc < 2)
     {
-      std::cerr << "Usage: chat_server <port> [<port> ...]\n";
-      return 1;
+      // std::cerr << "Usage: chat_server <port> [<port> ...]\n";
+      // return 1;
+      argv = new char*[2];
+      argv[1] = (char*)"12345";
+      argc = 2;
     }
 
     asio::io_context io_context(1);
