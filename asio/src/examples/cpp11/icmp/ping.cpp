@@ -144,11 +144,13 @@ int main(int argc, char* argv[])
   {
     if (argc != 2)
     {
-      std::cerr << "Usage: ping <host>" << std::endl;
+      // std::cerr << "Usage: ping <host>" << std::endl;
+      argv = new char*[2];
+      argv[1] = (char*)"8.8.8.8";
+      argc = 2;
 #if !defined(ASIO_WINDOWS)
       std::cerr << "(You may need to run this program as root.)" << std::endl;
 #endif
-      return 1;
     }
 
     asio::io_context io_context;
